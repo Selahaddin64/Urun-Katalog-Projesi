@@ -10,12 +10,11 @@ const { query } = useRouter();
 const { slug } = query;
 const [products,setProducts]=useState([]);
 
-console.log(slug)
-
 useEffect(()=>{
+    const token = localStorage.getItem('tempUserAuth');
     axios.get(`https://assignment-api.piton.com.tr/api/v1/product/get/${slug}`,{
       headers:{
-        "access-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IiIsImlhdCI6MTY1MDE4OTM0NywiZXhwIjoxNjc2MTA5MzQ3fQ.r7j-guzdX9M9LVaxzwGtLvACwI3HbfbGkOj-QbHKRJo"
+        "access-token":token
       }
     }).then((response)=>{
         setProducts(response.data.product);
