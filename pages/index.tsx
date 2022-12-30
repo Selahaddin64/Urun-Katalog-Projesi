@@ -11,7 +11,7 @@ const Login = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="allOfItem m-32 flex bg-gray-100">
+      <div className="allOfItem m-32 mx-auto pt-10 pb-24 sm:px-4 flex bg-gray-100">
         <SignupItem />
         <div className="br"></div>
         <LoginItem />

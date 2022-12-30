@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   UserIcon,
   DeviceMobileIcon,
@@ -14,20 +14,12 @@ import toast from "react-hot-toast";
 
 function Signup() {
   const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
   const [tel, setTel] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(false);
 
   const router = useRouter();
   const { redirect } = router.query;
-
-  useEffect(() => {
-    if (user) {
-      router.push(redirect || "home");
-    }
-  }, [router, redirect]);
 
   const {
     handleSubmit,
@@ -37,16 +29,19 @@ function Signup() {
   } = useForm();
 
   const addSignUpToDB = async () => {
-    const data = await Axios.post(`${process.env.NEXT_PUBLIC_REGISTER_URL}`, {
+    await Axios.post(`${process.env.NEXT_PUBLIC_REGISTER_URL}`, {
       name: name,
       password: password,
       email: email,
-    }).catch((err) => {
-      toast.error(getError(err));
-    });
-    const userAuth = data["token"];
-    localStorage.setItem("userAuth", userAuth);
-    setUser(true);
+    })
+      .then(function (response) {
+        const userAuth = response.data["token"];
+        localStorage.setItem("tempUserAuth", userAuth);
+      })
+      .catch((err) => {
+        toast.error(getError(err));
+      });
+    router.push(redirect || "home");
   };
 
   return (
@@ -72,12 +67,12 @@ function Signup() {
               maxLength: 20,
             })}
           ></input>
-          {errors.firstName && (
-            <p role="alert" className="text-red-500">
-              {errors.firstName.message}
-            </p>
-          )}
         </div>
+        {errors.firstName && (
+          <p role="alert" className="text-red-500">
+            {errors.firstName.message}
+          </p>
+        )}
         <div className="input-icons">
           <i className="icon">
             <UserIcon />
@@ -85,9 +80,6 @@ function Signup() {
           <input
             placeholder="Lastname"
             className="input-common m-3 rounded-full p-2 text-black focus:bg-gray-300"
-            onChange={(event) => {
-              setSurname(event.target.value);
-            }}
             type="text"
             id="lastName"
             {...register("lastName", {
@@ -95,13 +87,12 @@ function Signup() {
               pattern: /^[A-Za-z]+$/i,
             })}
           ></input>
-          {errors.lastName && (
-            <p className="text-red-500" role="alert">
-              {errors.lastName.message}
-            </p>
-          )}
         </div>
-
+        {errors.lastName && (
+          <p className="text-red-500" role="alert">
+            {errors.lastName.message}
+          </p>
+        )}
         <div className="input-icons">
           <i className="icon">
             <DeviceMobileIcon />
@@ -158,11 +149,10 @@ function Signup() {
               minLength: { value: 6, message: "password is more than 5 chars" },
             })}
           />
-          {errors.password && (
-            <div className="text-red-500 ">{errors.password.message}</div>
-          )}
         </div>
-
+        {errors.password && (
+          <div className="text-red-500 ">{errors.password.message}</div>
+        )}
         <div className="input-icons">
           <i className="icon">
             <LockClosedIcon />
@@ -181,17 +171,14 @@ function Signup() {
               },
             })}
           ></input>
-          {errors.confirmPassword && (
-            <div className="text-red-500 ">
-              {errors.confirmPassword.message}
-            </div>
-          )}
-          {errors.confirmPassword &&
-            errors.confirmPassword.type === "validate" && (
-              <div className="text-red-500 ">Password do not match</div>
-            )}
         </div>
-
+        {errors.confirmPassword && (
+          <div className="text-red-500 ">{errors.confirmPassword.message}</div>
+        )}
+        {errors.confirmPassword &&
+          errors.confirmPassword.type === "validate" && (
+            <div className="text-red-500 ">Password do not match</div>
+          )}
         <div>
           <button className="input-common m-3 h-10 w-52 rounded-full bg-blue-600 p-2 text-center text-white hover:bg-blue-700">
             Register
