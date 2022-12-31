@@ -2,24 +2,29 @@ import axios from 'axios';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import toast from "react-hot-toast";
+
+import { getError } from "../utils/error";
 import ProductDetailItem from '../components/ProductDetailItem';
 import Header from '../components/Header';
 
 export default function ProductDetail() {
 const { query } = useRouter();
 const { slug } = query;
-const [products,setProducts]=useState([]);
+const [products,setProducts]=useState({});
 
 useEffect(()=>{
     const token = localStorage.getItem('tempUserAuth');
-    axios.get(`https://assignment-api.piton.com.tr/api/v1/product/get/${slug}`,{
-      headers:{
-        "access-token":token
+    axios({
+      method: 'GET',
+      url: `${process.env.NEXT_PUBLIC_PRODUCTDETAIL_URL}/${slug}`,
+      headers: {
+          'access-token': token
       }
     }).then((response)=>{
         setProducts(response.data.product);
-    }).catch(()=>{
-        console.log("Err");
+    }).catch((err)=>{
+        toast.error(getError(err));
     });
 },[slug]);
 
