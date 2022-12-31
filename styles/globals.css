@@ -20,6 +20,9 @@
     .tabPanel {
       @apply grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3;
     }
+    .likes {
+      @apply mb-16 flex h-6 w-6 flex-shrink-0 cursor-pointer items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500 md:h-[40px] md:w-[40px]
+    }
     .allOfItem {
       justify-content: space-evenly; 
       align-items: center; 
