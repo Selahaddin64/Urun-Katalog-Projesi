@@ -20,7 +20,7 @@ Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_mediu
       - [Used Packages And Modules](#used-packages-and-modules)
       - [Signup](#signup)
       - [Login](#login)
-      - [Products](#products)
+      - [Home](#home)
       - [Products Detail](#products-detail)
       - [Prerequisites](#prerequisites)
 
@@ -61,19 +61,19 @@ This project is a product catalog site made with Next.js. When you enter the sit
 
 ## Signup
 
-![alt text](https://github.com/Selahaddin64/E-Ticaret-Sitesi/blob/master/src/Images/signup.gif)
+![alt text](https://github.com/Selahaddin64/Urun-Katalog-Projesi/blob/main/Gifs/PitonShop-signup.gif)
 
 ## Login
 
-![alt text](https://github.com/Selahaddin64/E-Ticaret-Sitesi/blob/master/src/Images/login.gif)
+![alt text](https://github.com/Selahaddin64/Urun-Katalog-Projesi/blob/main/Gifs/PitonShop-login.gif)
 
-## Products
+## Home
 
-![alt text](https://github.com/Selahaddin64/E-Ticaret-Sitesi/blob/master/src/Images/products.gif)
+![alt text](https://github.com/Selahaddin64/Urun-Katalog-Projesi/blob/main/Gifs/PitonShop-home.gif)
 
 ## Products Detail
 
-![alt text](https://github.com/Selahaddin64/E-Ticaret-Sitesi/blob/master/src/Images/detail.gif)
+![alt text](https://github.com/Selahaddin64/Urun-Katalog-Projesi/blob/main/Gifs/PitonShop-detail.gif)
 
 ## Prerequisites
 - Swagger UI
